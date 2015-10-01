@@ -9,9 +9,9 @@ main (void)
   char str[13];
 
   cpuid (0, reg);
-  *((unsigned int *) str + 0) = reg[EBX];
-  *((unsigned int *) str + 1) = reg[EDX];
-  *((unsigned int *) str + 2) = reg[ECX];
+  ((unsigned int *)str)[0] = reg[EBX];
+  ((unsigned int *)str)[1] = reg[EDX];
+  ((unsigned int *)str)[2] = reg[ECX];
 
   str[12] = 0;
 
