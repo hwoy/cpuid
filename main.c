@@ -16,6 +16,7 @@ main (void)
 
   ((unsigned int *)str)[2] = reg.ecx;
 
+  str[12]=0;
 
   printf ("\nYour CPU string = %s\n", str);
 
