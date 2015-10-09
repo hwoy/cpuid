@@ -4,18 +4,21 @@
 int
 main (void)
 {
-
-  unsigned int reg[4];
+  struct _REG reg;
   char str[13];
+  unsigned int i;
 
-  cpuid (0, reg);
-  ((unsigned int *)str)[0] = reg[EBX];
-  ((unsigned int *)str)[1] = reg[EDX];
-  ((unsigned int *)str)[2] = reg[ECX];
+  cpuid (0, &reg);
 
-  str[12] = 0;
+  ((unsigned int *)str)[0] = reg.ebx;;
 
-  printf ("Your CPU string = %s\n", str);
+  ((unsigned int *)str)[1] = reg.edx;
+
+  ((unsigned int *)str)[2] = reg.ecx;
+
+
+  printf ("\nYour CPU string = %s\n", str);
+
   return 0;
 
-}
+
