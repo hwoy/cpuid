@@ -21,5 +21,5 @@ main (void)
   printf ("\nYour CPU string = %s\n", str);
 
   return 0;
-
+}
 
