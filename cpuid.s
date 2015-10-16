@@ -8,9 +8,13 @@ subq $16,%rsp
 
 pushq %rbx
 
-movq %rsi,-8(%rbp)
+movq %rdi,-8(%rbp)
 
-movl %edi,%eax
+movl (%rdi),%eax
+movl 4(%rdi),%ebx
+movl 8(%rdi),%ecx
+movl 12(%rdi),%edx
+
 cpuid
 
 movq -8(%rbp),%rdi
