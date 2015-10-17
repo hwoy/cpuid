@@ -2,7 +2,7 @@
 #include "cpuid.h"
 
  static void showflags (unsigned int reg, struct _BIT_FLAGS *flag);
- unsigned int showcpubrand(const char *str);
+ static unsigned int showcpubrand(const char *str);
 
  
 int 
@@ -256,7 +256,7 @@ flag[i].feature);
  
 }
 
-unsigned int showcpubrand(const char *str)
+static unsigned int showcpubrand(const char *str)
 {
 	unsigned int i;
 	for(i=0;str[i]==0x20 && str[i]!='\0';i++);
