@@ -99,6 +99,9 @@ typedef char CPUBANDSTR[4 * 4 * 3 + 1];
 
 unsigned int *cpuid (REG * reg);
 
+#ifdef _CPUID32_
+int testcpuid (void);
+#endif
 
 
 char *getcpustr (CPUSTR str);

@@ -24,7 +24,15 @@ main (void)
 
   unsigned int i;
 
+#ifdef _CPUID32_
 
+if(!testcpuid())
+{
+	fprintf(stderr,"CPU is not support CPUID instruction\n");
+	return 1;
+}
+
+#endif
 
 
   puts ("****************** CPU ******************");

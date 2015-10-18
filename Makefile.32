@@ -1,8 +1,7 @@
 bin=cpus
 cc=gcc
-as=as
-CFLAGS=-O2
-
+CFLAGS=-m32 -O2 -D_CPUID32_
+ASFLAGS=-D_CPUID_LIN32_
 .PHONY: clean all
 
 .SUFFIXES:	.s
@@ -12,12 +11,12 @@ CFLAGS=-O2
 all: $(bin)
 
 $(bin): main.o cpuid.o excpuid.o
-	$(cc) -o $(bin) main.o cpuid.o excpuid.o
+	$(cc) -m32 -o $(bin) main.o cpuid.o excpuid.o
 
 main.o: main.c
 	$(cc) -c $(CFLAGS) -D_CPUID_BUILTIN_VAR_ main.c
 cpuid: cpuid.s
-	$(as) -o cpuid.o cpuid.s
+	$(cc)  cpuid.s
 excpuid.o: excpuid.c
 	$(cc) -c $(CFLAGS) excpuid.c
 
