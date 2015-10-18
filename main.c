@@ -271,3 +271,4 @@ showcpubrand (const char *str)
 
   return i;
 
+}

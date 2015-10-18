@@ -36,4 +36,5 @@ getcpubrandstr (CPUBANDSTR str)
   str[j * sizeof (unsigned int)] = 0;
 
   return str;
+
 }
