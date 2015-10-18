@@ -13,7 +13,7 @@ getcpustr (CPUSTR str)
 
   ((unsigned int *) str)[2] = reg.ecx;
 
-  str[12] = 0;
+  str[3 * sizeof (unsigned int)] = 0;
   return str;
 }
 
@@ -33,7 +33,7 @@ getcpubrandstr (CPUBANDSTR str)
       ((unsigned int *) str)[j++] = reg.edx;
     }
 
-  ((char *) str)[j * sizeof (unsigned int)] = 0;
+  str[j * sizeof (unsigned int)] = 0;
 
   return str;
 }
