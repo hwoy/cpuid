@@ -270,4 +270,4 @@ showcpubrand (const char *str)
   for (i = 0; str[i] == 0x20 && str[i] != '\0'; i++);
 
   return i;
-}
+
