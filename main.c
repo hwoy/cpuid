@@ -252,7 +252,7 @@ showflags (unsigned int reg, struct _BIT_FLAGS *flag)
 
 	  if (flag[i].name)
 
-	    printf ("%bit %u:%s [%s]\n", i, flag[i].name, flag[i].feature);
+	    printf ("bit %u:%s [%s]\n", i, flag[i].name, flag[i].feature);
 
 
 	}
