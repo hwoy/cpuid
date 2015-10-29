@@ -1,5 +1,5 @@
 bin=cpus
-cc=gcc
+cc=$(CC)
 as=as
 CFLAGS=-O2
 
