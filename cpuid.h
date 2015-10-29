@@ -1,20 +1,22 @@
 #ifndef NULL
 #define NULL ((void *) 0)
 #endif
+
+typedef unsigned int REG32;
 struct _REG
 {
 
 
-  unsigned int eax:32;
+  REG32 eax:32;
 
 
-  unsigned int ebx:32;
+  REG32 ebx:32;
 
 
-  unsigned int ecx:32;
+  REG32 ecx:32;
 
 
-  unsigned int edx:32;
+  REG32 edx:32;
 
 
 };
@@ -29,28 +31,28 @@ union _EAX1_EAX
   {
 
 
-    unsigned int step:4;
+    REG32 step:4;
 
 
-    unsigned int model:4;
+    REG32 model:4;
 
 
-    unsigned int family:4;
+    REG32 family:4;
 
 
-    unsigned int type:2;
+    REG32 type:2;
 
 
-    unsigned int _reserved1:2;
+    REG32 _reserved1:2;
 
 
-    unsigned int extmodel:4;
+    REG32 extmodel:4;
 
 
-    unsigned int extfamily:8;
+    REG32 extfamily:8;
 
 
-    unsigned int _reserved2:4;
+    REG32 _reserved2:4;
 
 
 
@@ -58,7 +60,7 @@ union _EAX1_EAX
 
 
 
-  unsigned int eax;
+  REG32 eax;
 
 
 
@@ -70,7 +72,7 @@ struct _BIT_FLAGS
 {
 
 
-  unsigned int bits;
+  REG32 bits;
 
 
   char *name;
@@ -97,7 +99,7 @@ typedef char CPUBANDSTR[4 * 4 * 3 + 1];
 
 
 
-unsigned int *cpuid (REG * reg);
+REG32 *cpuid (REG * reg);
 
 #ifdef _CPUID32_
 int testcpuid (void);

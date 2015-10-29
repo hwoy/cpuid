@@ -7,13 +7,13 @@ getcpustr (CPUSTR str)
 
   cpuid (&reg);
 
-  ((unsigned int *) str)[0] = reg.ebx;;
+  ((REG32 *) str)[0] = reg.ebx;;
 
-  ((unsigned int *) str)[1] = reg.edx;
+  ((REG32 *) str)[1] = reg.edx;
 
-  ((unsigned int *) str)[2] = reg.ecx;
+  ((REG32 *) str)[2] = reg.ecx;
 
-  str[3 * sizeof (unsigned int)] = 0;
+  str[3 * sizeof (REG32)] = 0;
   return str;
 }
 
@@ -27,13 +27,13 @@ getcpubrandstr (CPUBANDSTR str)
     {
       reg.eax = i;
       cpuid (&reg);
-      ((unsigned int *) str)[j++] = reg.eax;
-      ((unsigned int *) str)[j++] = reg.ebx;
-      ((unsigned int *) str)[j++] = reg.ecx;
-      ((unsigned int *) str)[j++] = reg.edx;
+      ((REG32 *) str)[j++] = reg.eax;
+      ((REG32 *) str)[j++] = reg.ebx;
+      ((REG32 *) str)[j++] = reg.ecx;
+      ((REG32 *) str)[j++] = reg.edx;
     }
 
-  str[j * sizeof (unsigned int)] = 0;
+  str[j * sizeof (REG32)] = 0;
 
   return str;
 
