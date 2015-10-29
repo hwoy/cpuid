@@ -1,5 +1,5 @@
 bin=cpus
-cc=gcc
+cc=$(CC)
 CFLAGS=-m32 -O2 -D_CPUID32_
 ASFLAGS=-D_CPUID_LIN32_
 .PHONY: clean all
