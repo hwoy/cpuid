@@ -2,7 +2,7 @@
 #include "cpuid.h"
 #include "cpuiddata.h"
 
-static void showflags (unsigned int reg, const struct _BIT_FLAGS *flag);
+static void showflags (REG32 reg, const struct _BIT_FLAGS *flag);
 static unsigned int showcpubrand (const char *str);
 
 
@@ -161,11 +161,11 @@ int main (void)
 
 
 
-static void showflags (unsigned int reg, const struct _BIT_FLAGS *flag)
+static void showflags (REG32 reg, const struct _BIT_FLAGS *flag)
 {
   unsigned int i;
 
-  for (i = 0; i < 32; i++)
+  for (i = 0; i < sizeof(REG32)*8; i++)
   {
     if (reg & (1 << i) && flag[i].name)
         printf ("bit %u:%s [%s]\n", i, flag[i].name, flag[i].feature);
