@@ -53,16 +53,12 @@ int main (void)
 
   if (eax1_eax.cpu.family == 0xF)
   {
-    printf ("extmodel:%X\n",
-      (eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
-
+    printf ("extmodel:%X\n",(eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
     printf ("extfamily:%X\n", eax1_eax.cpu.extfamily + eax1_eax.cpu.family);
   }
   else if (eax1_eax.cpu.family == 0x6)
   {
-    printf ("extmodel:%X\n",
-      (eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
-
+    printf ("extmodel:%X\n",(eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
     printf ("extfamily:%X\n", eax1_eax.cpu.family);
   }
 
@@ -134,9 +130,7 @@ static void showflags (REG32 reg, const struct _BIT_FLAGS *flag)
   {
     if (reg & (1 << i) && flag[i].name)
         printf ("bit %u:%s [%s]\n", i, flag[i].name, flag[i].feature);
-
   }
-
 }
 
 static unsigned int showcpubrand (const char *str)
@@ -145,5 +139,4 @@ static unsigned int showcpubrand (const char *str)
   for (i = 0; str[i] == 0x20 && str[i] != '\0'; i++);
 
   return i;
-
 }
