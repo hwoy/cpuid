@@ -1,7 +1,7 @@
 # cpuid
-This cpuid is very simple and portable cpuid(x86 and x86-64).
-Written in ansi C.
-Can be compiled by gcc.
+1. This cpuid is very simple and portable cpuid(x86 and x86-64).
+2. Written in ansi C.
+3. Can be compiled by gcc.
 
 ### Example
 
