@@ -398,9 +398,6 @@ static const struct _BIT_FLAGS eax80000001h_ecx[] = {
 {30, NULL, NULL},
 {31, NULL, NULL}
 
-
 };
-
-
 
 #endif
