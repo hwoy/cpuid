@@ -1,46 +1,31 @@
 #include <stdio.h>
 #include "cpuid.h"
+#include "cpuiddata.h"
 
-static void showflags (unsigned int reg, struct _BIT_FLAGS *flag);
+static void showflags (unsigned int reg, const struct _BIT_FLAGS *flag);
 static unsigned int showcpubrand (const char *str);
 
 
-int
-main (void)
+int main (void)
 {
-
-
   REG reg;
-
-
-  CPUSTR str;
-
-
-  CPUBANDSTR bstr;
-
 
   EAX1_EAX eax1_eax;
 
+  #ifndef __x86_64__
+  if(!testcpuid())
+  {
+    fprintf(stderr,"CPU is not support CPUID instruction\n");
+    return 1;
+  }
+  #endif
 
-  unsigned int i;
+    puts ("****************** CPU ******************");
 
-#ifdef _CPUID32_
-
-if(!testcpuid())
-{
-	fprintf(stderr,"CPU is not support CPUID instruction\n");
-	return 1;
-}
-
-#endif
-
-
-  puts ("****************** CPU ******************");
-
-
-  printf ("CPU string:%s\n", getcpustr (str));
-
-
+  {
+    CPUSTR str;
+    printf ("CPU string:%s\n", getcpustr (str));
+  }
 
   reg.eax = 0x80000000;
 
@@ -49,17 +34,11 @@ if(!testcpuid())
 
 
   if (reg.eax >= 0x80000004)
+  {
+      CPUBANDSTR bstr;
+      printf ("CPU Brand string:%s\n",&bstr[showcpubrand (getcpubrandstr (bstr))]);
 
-
-    {
-
-
-      printf ("CPU Brand string:%s\n",
-	      &bstr[showcpubrand (getcpubrandstr (bstr))]);
-
-
-    }
-
+  }
 
   reg.eax = 1;
 
@@ -68,8 +47,6 @@ if(!testcpuid())
 
 
   eax1_eax.eax = reg.eax;
-
-
 
   printf ("step:%X\n", eax1_eax.cpu.step);
 
@@ -82,29 +59,18 @@ if(!testcpuid())
 
   printf ("type:%X\n", eax1_eax.cpu.type);
 
-
-
   if (eax1_eax.cpu.family == 0xF)
-
-
-    {
-
-
+  {
       printf ("extmodel:%X\n",
 	      (eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
 
 
       printf ("extfamily:%X\n", eax1_eax.cpu.extfamily + eax1_eax.cpu.family);
-
-
-    }
+  }
 
 
   else if (eax1_eax.cpu.family == 0x6)
-
-
     {
-
 
       printf ("extmodel:%X\n",
 	      (eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
@@ -112,15 +78,9 @@ if(!testcpuid())
 
       printf ("extfamily:%X\n", eax1_eax.cpu.family);
 
-
     }
 
-
-
   putchar ('\n');
-
-
-
 
 
   puts ("****************** EAX=1,EDX ******************");
@@ -132,8 +92,6 @@ if(!testcpuid())
   putchar ('\n');
 
 
-
-
   puts ("****************** EAX=1,ECX ******************");
 
 
@@ -141,9 +99,6 @@ if(!testcpuid())
 
 
   putchar ('\n');
-
-
-
 
 
   reg.eax = 7;
@@ -165,8 +120,6 @@ if(!testcpuid())
   putchar ('\n');
 
 
-
-
   puts ("****************** EAX=7,ECX=0,ECX ******************");
 
 
@@ -176,95 +129,52 @@ if(!testcpuid())
   putchar ('\n');
 
 
-
-
   reg.eax = 0x80000000;
 
 
   cpuid (&reg);
 
 
-
   if (reg.eax > 0x80000000)
-
-
-    {
-
-
+  {
 
       reg.eax = 0x80000001;
 
-
       cpuid (&reg);
-
-
 
       puts ("****************** EAX=80000001h,EDX ******************");
 
-
       showflags (reg.edx, eax80000001h_edx);
 
-
       putchar ('\n');
-
-
 
       puts ("****************** EAX=80000001h,ECX ******************");
 
-
       showflags (reg.ecx, eax80000001h_ecx);
 
-
       putchar ('\n');
-
-
-
     }
-
-
-
 
   return 0;
 
-
 }
 
 
 
-static void
-showflags (unsigned int reg, struct _BIT_FLAGS *flag)
+static void showflags (unsigned int reg, const struct _BIT_FLAGS *flag)
 {
-
   unsigned int i;
 
-
   for (i = 0; i < 32; i++)
+  {
+    if (reg & (1 << i) && flag[i].name)
+        printf ("bit %u:%s [%s]\n", i, flag[i].name, flag[i].feature);
 
-
-    {
-
-
-      if (reg & (1 << i))
-
-
-	{
-
-
-	  if (flag[i].name)
-
-	    printf ("bit %u:%s [%s]\n", i, flag[i].name, flag[i].feature);
-
-
-	}
-
-
-    }
-
+  }
 
 }
 
-static unsigned int
-showcpubrand (const char *str)
+static unsigned int showcpubrand (const char *str)
 {
   unsigned int i;
   for (i = 0; str[i] == 0x20 && str[i] != '\0'; i++);

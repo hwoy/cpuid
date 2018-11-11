@@ -1,3 +1,6 @@
+#ifndef __CPUID_H__
+#define __CPUID_H__
+
 #ifndef NULL
 #define NULL ((void *) 0)
 #endif
@@ -99,11 +102,12 @@ typedef char CPUBANDSTR[4 * 4 * 3 + 1];
 
 
 
-REG32 *cpuid (REG * reg);
+REG *cpuid (REG * reg);
 
-#ifdef _CPUID32_
+#ifndef __x86_64__
 int testcpuid (void);
 #endif
+
 
 
 char *getcpustr (CPUSTR str);
@@ -115,7 +119,7 @@ char *getcpubrandstr (CPUBANDSTR str);
 
 #ifdef _CPUID_BUILTIN_VAR_
 
-static struct _BIT_FLAGS eax1_edx[] = { {0, "fpu", "Onboard x87 FPU"},
+static const struct _BIT_FLAGS eax1_edx[] = { {0, "fpu", "Onboard x87 FPU"},
 
 {1, "vme", "Virtual 8086 mode extensions (such as VIF, VIP, PIV)"},
 
@@ -181,7 +185,7 @@ static struct _BIT_FLAGS eax1_edx[] = { {0, "fpu", "Onboard x87 FPU"},
 };
 
 
-static struct _BIT_FLAGS eax1_ecx[] = {
+static const struct _BIT_FLAGS eax1_ecx[] = {
     {0, "sse3", "Prescott New Instructions-SSE3 (PNI)"},
 
 {1, "pclmulqdq", "PCLMULQDQ support"},
@@ -260,7 +264,7 @@ static struct _BIT_FLAGS eax1_ecx[] = {
 };
 
 
-static struct _BIT_FLAGS eax7ecx0_ebx[] = {
+static const struct _BIT_FLAGS eax7ecx0_ebx[] = {
     {0, "fsgsbase", "Access to base of %fs and %gs"},
 
 {1, "", "IA32_TSC_ADJUST"},
@@ -342,7 +346,7 @@ static struct _BIT_FLAGS eax7ecx0_ebx[] = {
 };
 
 
-static struct _BIT_FLAGS eax7ecx0_ecx[] = {
+static const struct _BIT_FLAGS eax7ecx0_ecx[] = {
     {0, "prefetchwt1", "PREFETCHWT1 instruction"},
 
 {1, "avx512vbmi", "AVX-512 Vector Bit Manipulation Instructions"},
@@ -381,7 +385,7 @@ static struct _BIT_FLAGS eax7ecx0_ecx[] = {
 };
 
 
-static struct _BIT_FLAGS eax80000001h_edx[] = { {0, "fpu", "Onboard x87 FPU"},
+static const struct _BIT_FLAGS eax80000001h_edx[] = { {0, "fpu", "Onboard x87 FPU"},
 
 {1, "vme", "Virtual mode extensions (VIF)"},
 
@@ -449,7 +453,7 @@ static struct _BIT_FLAGS eax80000001h_edx[] = { {0, "fpu", "Onboard x87 FPU"},
 
 
 
-static struct _BIT_FLAGS eax80000001h_ecx[] = {
+static const struct _BIT_FLAGS eax80000001h_ecx[] = {
     {0, "lahf_lm", "LAHF/SAHF in long mode"},
 
 {1, "cmp_legacy", "Hyperthreading not valid"},
@@ -516,5 +520,7 @@ static struct _BIT_FLAGS eax80000001h_ecx[] = {
 };
 
 
+
+#endif
 
 #endif
