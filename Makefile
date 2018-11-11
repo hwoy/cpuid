@@ -13,3 +13,6 @@ $(bin): main.o cpuid.o excpuid.o
 clean:
 	 rm -f *.o $(bin) *~ *.exe
 
+cpuid.o: cpuid.c cpuid.h
+excpuid.o: excpuid.c cpuid.h
+main.o: main.c cpuid.h cpuiddata.h
