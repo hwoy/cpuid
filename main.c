@@ -20,7 +20,7 @@ int main (void)
   }
   #endif
 
-    puts ("****************** CPU ******************");
+  puts ("****************** CPU ******************");
 
   {
     CPUSTR str;
@@ -29,136 +29,101 @@ int main (void)
 
   reg.eax = 0x80000000;
 
-
   cpuid (&reg);
-
 
   if (reg.eax >= 0x80000004)
   {
       CPUBANDSTR bstr;
       printf ("CPU Brand string:%s\n",&bstr[showcpubrand (getcpubrandstr (bstr))]);
-
   }
 
   reg.eax = 1;
 
-
   cpuid (&reg);
-
 
   eax1_eax.eax = reg.eax;
 
   printf ("step:%X\n", eax1_eax.cpu.step);
 
-
   printf ("model:%X\n", eax1_eax.cpu.model);
 
-
   printf ("family:%X\n", eax1_eax.cpu.family);
-
 
   printf ("type:%X\n", eax1_eax.cpu.type);
 
   if (eax1_eax.cpu.family == 0xF)
   {
-      printf ("extmodel:%X\n",
-	      (eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
+    printf ("extmodel:%X\n",
+      (eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
 
+    printf ("extfamily:%X\n", eax1_eax.cpu.extfamily + eax1_eax.cpu.family);
+  }
+  else if (eax1_eax.cpu.family == 0x6)
+  {
+    printf ("extmodel:%X\n",
+      (eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
 
-      printf ("extfamily:%X\n", eax1_eax.cpu.extfamily + eax1_eax.cpu.family);
+    printf ("extfamily:%X\n", eax1_eax.cpu.family);
   }
 
-
-  else if (eax1_eax.cpu.family == 0x6)
-    {
-
-      printf ("extmodel:%X\n",
-	      (eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
-
-
-      printf ("extfamily:%X\n", eax1_eax.cpu.family);
-
-    }
-
   putchar ('\n');
-
 
   puts ("****************** EAX=1,EDX ******************");
 
-
   showflags (reg.edx, eax1_edx);
 
-
   putchar ('\n');
-
 
   puts ("****************** EAX=1,ECX ******************");
 
-
   showflags (reg.ecx, eax1_ecx);
 
-
   putchar ('\n');
-
 
   reg.eax = 7;
 
-
   reg.ecx = 0;
 
-
   cpuid (&reg);
-
-
 
   puts ("****************** EAX=7,ECX=0,EBX ******************");
 
-
   showflags (reg.ebx, eax7ecx0_ebx);
 
-
   putchar ('\n');
-
 
   puts ("****************** EAX=7,ECX=0,ECX ******************");
 
-
   showflags (reg.ecx, eax7ecx0_ecx);
-
 
   putchar ('\n');
 
-
   reg.eax = 0x80000000;
-
 
   cpuid (&reg);
 
-
   if (reg.eax > 0x80000000)
   {
+    reg.eax = 0x80000001;
 
-      reg.eax = 0x80000001;
+    cpuid (&reg);
 
-      cpuid (&reg);
+    puts ("****************** EAX=80000001h,EDX ******************");
 
-      puts ("****************** EAX=80000001h,EDX ******************");
+    showflags (reg.edx, eax80000001h_edx);
 
-      showflags (reg.edx, eax80000001h_edx);
+    putchar ('\n');
 
-      putchar ('\n');
+    puts ("****************** EAX=80000001h,ECX ******************");
 
-      puts ("****************** EAX=80000001h,ECX ******************");
+    showflags (reg.ecx, eax80000001h_ecx);
 
-      showflags (reg.ecx, eax80000001h_ecx);
-
-      putchar ('\n');
-    }
+    putchar ('\n');
+  }
 
   return 0;
 
 }
-
 
 
 static void showflags (REG32 reg, const struct _BIT_FLAGS *flag)
