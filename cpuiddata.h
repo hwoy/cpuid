@@ -1,7 +1,8 @@
 #ifndef __CPUIDDATA_H__
 #define __CPUIDATA_H__
 
-static const struct _BIT_FLAGS eax1_edx[] = { {0, "fpu", "Onboard x87 FPU"},
+static const struct _BIT_FLAGS eax1_edx[] = { 
+{0, "fpu", "Onboard x87 FPU"},
 
 {1, "vme", "Virtual 8086 mode extensions (such as VIF, VIP, PIV)"},
 
@@ -68,7 +69,7 @@ static const struct _BIT_FLAGS eax1_edx[] = { {0, "fpu", "Onboard x87 FPU"},
 
 
 static const struct _BIT_FLAGS eax1_ecx[] = {
-    {0, "sse3", "Prescott New Instructions-SSE3 (PNI)"},
+{0, "sse3", "Prescott New Instructions-SSE3 (PNI)"},
 
 {1, "pclmulqdq", "PCLMULQDQ support"},
 
@@ -116,38 +117,32 @@ static const struct _BIT_FLAGS eax1_ecx[] = {
 
 {23, "popcnt", "POPCNT instruction"},
 
-{24, "tsc-deadline",
- "APIC supports one-shot operation using a TSC deadline value"},
+{24, "tsc-deadline","APIC supports one-shot operation using a TSC deadline value"},
 
-{25,
- "aes",
- "AES instruction set"},
+{25,"aes","AES instruction set"},
 
 
 {26, "xsave", "XSAVE, XRESTOR, XSETBV, XGETBV"},
 
-{27, "osxsave",
- "XSAVE enabled by OS"},
+{27, "osxsave","XSAVE enabled by OS"},
 
 
 {28, "avx", "Advanced Vector Extensions"},
 
-{29, "f16c",
- "F16C (half-precision) FP support"},
+{29, "f16c","F16C (half-precision) FP support"},
 
 
 {30, "rdrnd", "RDRAND (on-chip random number generator) support"},
 
 
-{31, "hypervisor",
- "Running on a hypervisor (always 0 on a real CPU, but also with some hypervisors)"}
+{31, "hypervisor","Running on a hypervisor (always 0 on a real CPU, but also with some hypervisors)"}
 
 
 };
 
 
 static const struct _BIT_FLAGS eax7ecx0_ebx[] = {
-    {0, "fsgsbase", "Access to base of %fs and %gs"},
+{0, "fsgsbase", "Access to base of %fs and %gs"},
 
 {1, "", "IA32_TSC_ADJUST"},
 
@@ -190,14 +185,12 @@ static const struct _BIT_FLAGS eax7ecx0_ebx[] = {
 
 {20, "smap", "Supervisor Mode Access Prevention"},
 
-{21, "avx512ifma",
- "AVX-512 Integer Fused Multiply-Add Instructions"},
+{21, "avx512ifma","AVX-512 Integer Fused Multiply-Add Instructions"},
 
 
 {22, "pcommit", "PCOMMIT instruction"},
 
-{23, "clflushopt",
- "CLFLUSHOPT instruction"},
+{23, "clflushopt","CLFLUSHOPT instruction"},
 
 
 {24, "clwb", "CLWB instruction"},
@@ -207,29 +200,24 @@ static const struct _BIT_FLAGS eax7ecx0_ebx[] = {
 
 {26, "avx512pf", "AVX-512 Prefetch Instructions"},
 
-{27, "avx512er",
- "AVX-512 Exponential and Reciprocal Instructions"},
+{27, "avx512er","AVX-512 Exponential and Reciprocal Instructions"},
 
 
 {28, "avx512cd", "AVX-512 Conflict Detection Instructions"},
 
-{29,
- "sha",
- "Intel SHA extensions"},
+{29,"sha","Intel SHA extensions"},
 
 
 {30, "avx512bw", "AVX-512 Byte and Word Instructions"},
 
-{31,
- "avx512vl",
- "AVX-512 Vector Length Extensions"}
+{31,"avx512vl","AVX-512 Vector Length Extensions"}
 
 
 };
 
 
 static const struct _BIT_FLAGS eax7ecx0_ecx[] = {
-    {0, "prefetchwt1", "PREFETCHWT1 instruction"},
+{0, "prefetchwt1", "PREFETCHWT1 instruction"},
 
 {1, "avx512vbmi", "AVX-512 Vector Bit Manipulation Instructions"},
 
@@ -267,7 +255,8 @@ static const struct _BIT_FLAGS eax7ecx0_ecx[] = {
 };
 
 
-static const struct _BIT_FLAGS eax80000001h_edx[] = { {0, "fpu", "Onboard x87 FPU"},
+static const struct _BIT_FLAGS eax80000001h_edx[] = { 
+{0, "fpu", "Onboard x87 FPU"},
 
 {1, "vme", "Virtual mode extensions (VIF)"},
 
@@ -336,7 +325,7 @@ static const struct _BIT_FLAGS eax80000001h_edx[] = { {0, "fpu", "Onboard x87 FP
 
 
 static const struct _BIT_FLAGS eax80000001h_ecx[] = {
-    {0, "lahf_lm", "LAHF/SAHF in long mode"},
+{0, "lahf_lm", "LAHF/SAHF in long mode"},
 
 {1, "cmp_legacy", "Hyperthreading not valid"},
 
