@@ -13,8 +13,8 @@ step:7
 model:A
 family:6
 type:0
-extmodel:2A
-extfamily:6
+ext.model:2A
+ext.family:6
 
 ****************** EAX=1,EDX ******************
 bit 0:fpu [Onboard x87 FPU]
