@@ -1,9 +1,10 @@
 #include "cpuid.h"
 
-REG *cpuid (REG * reg)
+REG cpuid (REG * reg)
 {
-	__asm__ volatile("cpuid":"=a"(reg->eax),"=b"(reg->ebx),"=c"(reg->ecx),"=d"(reg->edx):"a"(reg->eax),"b"(reg->ebx),"c"(reg->ecx),"d"(reg->edx));
-	return reg;
+	REG oreg;
+	__asm__ volatile("cpuid":"=a"(oreg.eax),"=b"(oreg.ebx),"=c"(oreg.ecx),"=d"(oreg.edx):"a"(reg->eax),"b"(reg->ebx),"c"(reg->ecx),"d"(reg->edx));
+	return oreg;
 }
 
 #ifndef __x86_64__

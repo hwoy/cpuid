@@ -29,7 +29,7 @@ int main (void)
 
   reg.eax = 0x80000000;
 
-  cpuid (&reg);
+  reg = cpuid (&reg);
 
   if (reg.eax >= 0x80000004)
   {
@@ -39,7 +39,7 @@ int main (void)
 
   reg.eax = 1;
 
-  cpuid (&reg);
+  reg = cpuid (&reg);
 
   eax1_eax.eax = reg.eax;
 
@@ -53,13 +53,13 @@ int main (void)
 
   if (eax1_eax.cpu.family == 0xF)
   {
-    printf ("extmodel:%X\n",(eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
-    printf ("extfamily:%X\n", eax1_eax.cpu.extfamily + eax1_eax.cpu.family);
+    printf ("ext.model:%X\n",(eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
+    printf ("ext.family:%X\n", eax1_eax.cpu.extfamily + eax1_eax.cpu.family);
   }
   else if (eax1_eax.cpu.family == 0x6)
   {
-    printf ("extmodel:%X\n",(eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
-    printf ("extfamily:%X\n", eax1_eax.cpu.family);
+    printf ("ext.model:%X\n",(eax1_eax.cpu.extmodel << 4) + eax1_eax.cpu.model);
+    printf ("ext.family:%X\n", eax1_eax.cpu.family);
   }
 
   putchar ('\n');
@@ -80,7 +80,7 @@ int main (void)
 
   reg.ecx = 0;
 
-  cpuid (&reg);
+  reg = cpuid (&reg);
 
   puts ("****************** EAX=7,ECX=0,EBX ******************");
 
@@ -96,13 +96,13 @@ int main (void)
 
   reg.eax = 0x80000000;
 
-  cpuid (&reg);
+  reg = cpuid (&reg);
 
   if (reg.eax > 0x80000000)
   {
     reg.eax = 0x80000001;
 
-    cpuid (&reg);
+    reg = cpuid (&reg);
 
     puts ("****************** EAX=80000001h,EDX ******************");
 

@@ -5,7 +5,7 @@ getcpustr (CPUSTR str)
   REG reg;
   reg.eax = 0;
 
-  cpuid (&reg);
+  reg = cpuid (&reg);
 
   ((REG32 *) str)[0] = reg.ebx;;
 
@@ -26,7 +26,7 @@ getcpubrandstr (CPUBANDSTR str)
   for (i = 0x80000002, j = 0; i <= 0x80000004; i++)
     {
       reg.eax = i;
-      cpuid (&reg);
+      reg = cpuid (&reg);
       ((REG32 *) str)[j++] = reg.eax;
       ((REG32 *) str)[j++] = reg.ebx;
       ((REG32 *) str)[j++] = reg.ecx;
