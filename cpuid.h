@@ -72,7 +72,7 @@ typedef char CPUSTR[13];
 typedef char CPUBANDSTR[4 * 4 * 3 + 1];
 
 
-REG cpuid (REG * reg);
+REG cpuid (const REG * reg);
 
 #ifndef __x86_64__
 int testcpuid (void);
